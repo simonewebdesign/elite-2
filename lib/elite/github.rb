@@ -49,9 +49,10 @@ module Elite
     # find it out.
     # another limit could be on the number of contributions made on a single repository.
     def self.run!(contributions_number)
-      File.new('foo.txt', 'w') do |file|
+
+      File.open('foo.txt', 'a') do |file|
         contributions_number.times do |i|
-          file.write(i)
+          file << i
 
           commit_msg = i
           commit_date = Date.today - i
