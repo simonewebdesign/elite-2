@@ -50,17 +50,21 @@ module Elite
     # another limit could be on the number of contributions made on a single repository.
     def self.run!(contributions_number)
 
-      File.open('foo.txt', 'a') do |file|
-        contributions_number.times do |i|
-          file << i
+      contributions_number.times do |i|
+
+        commit_msg, commit_date = nil
+
+        File.open('foo.txt', 'a') do |file|
+
+          file << 0
 
           commit_msg = i
           commit_date = Date.today - i
-
-          `git add .`
-          `git commit -m "#{commit_msg}" --date='#{commit_date}'`
         end
+
+        `git commit -am "#{commit_msg}" --date='#{commit_date}'`
       end
+
       puts "Done! You can now `git push`."
     end
 
